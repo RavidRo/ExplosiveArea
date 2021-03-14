@@ -1,0 +1,86 @@
+{% extends 'ExplosiveArea_App/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'ExplosiveArea_App/navbar.html' %}
+
+<div class="basketball-content row">
+    <div class="col-sm-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href={% url 'home' %}>בית</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><span class="breadcrumb-link">כדור-סל</span></li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="col-sm-6 mb-4">
+        <div class="basketball-card card h-100" style="max-width: 850px;">
+            <div class="row no-gutters h-100">
+                <div class="col-md-4">
+                    <img src="{% static 'ExplosiveArea_App/images/WeeklyPlanner.jpg' %}" class="card-img basketball-card-img w-100"
+                        alt="Weekly Planner Image">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">לו"ז אימונים שבועי</h5>
+                        <a href={% url 'section' planner_section %}?basketball='T' class="stretched-link">המשך לדף</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+        <div class="basketball-card card h-100" style="max-width: 850px;">
+            <div class="row no-gutters h-100">
+                <div class="col-md-4">
+                    <img src="{% static 'ExplosiveArea_App/images/excercises.jpeg' %}" class="card-img basketball-card-img w-100"
+                        alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">אימונים</h5>
+                        <a href={% url 'section' excercises_section %}?basketball='T' class="stretched-link">המשך
+                            לדף</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+        <div class="basketball-card card h-100" style="max-width: 850px;">
+            <div class="row no-gutters h-100">
+                <div class="col-md-4">
+                    <img src="{% static 'ExplosiveArea_App/images/Defence.jpeg' %}" class="card-img basketball-card-img w-100"
+                        alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">הגנה</h5>
+                        <a href={% url 'section' defence_section %}?basketball='T' class="stretched-link">המשך לדף</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+        <div class="basketball-card card h-100" style="max-width: 850px;">
+            <div class="row no-gutters h-100">
+                <div class="col-md-4">
+                    <img src="{% static 'ExplosiveArea_App/images/BasketballMoves.jpeg' %}" class="card-img basketball-card-img w-100"
+                        alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">מהלכים</h5>
+                        <a href={% url 'section' moves_section %}?basketball='T' class="stretched-link">המשך לדף</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

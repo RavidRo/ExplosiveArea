@@ -1,0 +1,35 @@
+{% extends 'ExplosiveArea_App/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'ExplosiveArea_App/navbar.html' %}
+
+<div class="excercise-content row">
+    <div class="col-sm-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href={% url 'home' %}>בית</a></li>
+                {% if basketball_section %}
+                    <li class="breadcrumb-item"><a href={% url 'basketball' %}>כדורסל</a></li>
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href={% url 'section' section %}?basketball='T'>{{ section_name }}</a></li>
+                {% else %}
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href={% url 'section' section %}>{{ section_name }}</a></li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page"><span class="breadcrumb-link">יצירת תרגיל חדש</span></li>
+            </ol>
+        </nav>
+    </div>
+
+    <form class="col-sm-12 text-center" action="" method='POST' enctype="multipart/form-data">
+        <div class="text-right">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+        </div>
+        <input class="btn btn-success btn-lg shadows" type="Submit" value="שמירה">
+    </form>
+</div>
+
+{% endblock content %}

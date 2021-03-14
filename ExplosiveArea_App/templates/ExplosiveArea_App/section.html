@@ -1,0 +1,110 @@
+{% extends 'ExplosiveArea_App/base.html' %}
+
+{% block content %}
+{% load static %}
+
+{% include 'ExplosiveArea_App/navbar.html' %}
+
+
+<div class="excercises-row row">
+
+    <!-- page Header -->
+    <div class="section-title col-12 text-right">
+        <h4>{{ section_name }}</h4>
+
+         <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href={% url 'home' %}>בית</a></li>
+                {% if basketball_section %}
+                    <li class="breadcrumb-item"><a href={% url 'basketball' %}>כדור-סל</a></li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page"><span class="breadcrumb-link">{{ section_name }}</span></li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Excercises Cards -->
+    {% for excercise in excercises %}
+        <div class="excercise col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                {% if basketball_section %}
+                    <i href={% url 'excercise_delete' section excercise.id %}?basketball='T' class="delete-excercise-icon fas fa-minus-square"></i>
+                {% else %}
+                    <i href={% url 'excercise_delete' section excercise.id %} class="delete-excercise-icon fas fa-minus-square"></i>
+                {% endif %}
+                {% if excercise.image %}
+                    <img src={{ excercise.image.url }} class="card-img-top excercise-img" alt="Excercise img">
+                {% else %}
+                    <img src="{% static 'ExplosiveArea_App/images/excercise_default.jpg' %}" class="card-img-top excercise-img" alt="Excercise img">
+                {% endif %}
+                <div class="card-body text-right">
+                    <h5 class="card-title">{{ excercise.title }}</h5>
+                    {% if excercise.intendedFor %}
+                        <h6 class='card-subtitle mb-2 text-muted'>מיועד ל{{ excercise.intendedFor}}</h6>
+                    {% endif %}
+                    {% if excercise.description %}
+                        <p class="card-text">{{ excercise.description }}</p>
+                    {% endif %}
+                    {% if basketball_section %}
+                        <a href={% url 'excercise' section excercise.title|cut:" " excercise.id %}?basketball='T' class="stretched-link">המשך לדף</a>
+                    {% else %}
+                        <a href={% url 'excercise' section excercise.title|cut:" " excercise.id %} class="stretched-link">המשך לדף</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    
+    {% if user.is_authenticated %} 
+        <div class="excercise col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                <img src="{% static 'ExplosiveArea_App/images/add_button.png' %}" class="card-img-top add-img" alt="Add excercise img">
+                <div class="card-body text-right">
+
+                    {% if basketball_section %}
+                        <a class="stretched-link" href={% url 'excercise_add' section %}?basketball='T'><h5 class="card-title">יצירת תרגיל חדש</h5></a>
+                    {% else %}
+                        <a class="stretched-link" href={% url 'excercise_add' section %}><h5 class="card-title">יצירת תרגיל חדש</h5></a>
+                    {% endif %}
+                    
+                    <!-- <h6 class='card-subtitle mb-2 text-muted'>מיועד ל</h6> -->
+                    <!-- <p class="card-text"></p> -->
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+
+{% block code %}
+    <script>
+        $('document').ready(()=>{
+            $('.delete-excercise-icon').click(function() {
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success swal-btn',
+                        cancelButton: 'btn btn-danger swal-btn'
+                    },
+                    buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: "אתה מוחק תרגיל!",
+                    text: 'אתה בטוח שברצונך להמשיך?',
+                    icon: 'warning',
+                    confirmButtonText: 'מחק',
+                    showCancelButton: true,
+                    cancelButtonText: 'ביטול'
+                }).then((result) => {
+                    if (result.value) {
+                        const deleteUrl = this.getAttribute('href');
+                        window.location.href = deleteUrl;
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock code %}

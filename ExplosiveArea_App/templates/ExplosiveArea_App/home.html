@@ -1,0 +1,20 @@
+{% extends 'ExplosiveArea_App/base.html' %}
+
+{% block content%}
+
+{% include 'ExplosiveArea_App/navbar.html' %}
+
+<div class="main-title bg-light row justify-content-center">
+    <a class='btn-main btn btn-lg btn-outline-success' href={% url 'section' athelete_section %}><h3>אתלטיקה לספורט קבוצתי</h3></a>
+</div>
+<div class="main-title row justify-content-center">
+    <a class='btn-main btn btn-lg btn-outline-success' href={% url 'section' olympic_section %}><h3>אתלטיקה לספורטאי אולימפי</h3></a>
+</div>
+<div class="main-title bg-light row justify-content-center">
+    <a class='btn-main btn btn-lg btn-outline-success' href={% url 'basketball' %}><h3>כדורסל</h3></a>
+</div>
+<div class="main-title row justify-content-center">
+    <a class='btn-main btn btn-lg btn-outline-success' href={% url 'section' gym_section %}><h3>חדר כושר</h3></a>
+</div>
+
+{% endblock content%}

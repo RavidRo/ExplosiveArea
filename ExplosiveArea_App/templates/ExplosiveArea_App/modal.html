@@ -1,0 +1,56 @@
+<!-- Modal -->
+<!-- Do I want it centered verticaly? right now its centered. -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal modal-dialog-centered" role="document">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">התחברות</h5>
+				<button type="button" class="close ml-0" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<!-- Modal Form -->
+			<div class="modal-body">
+				<form id="login-form" action="" method="POST">
+					
+					<!-- Username -->
+					<div class="input-group mb-3">
+						<div class="input-group-append mr-auto">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input id="username-box" class="input-box ml-auto" type="text" name="username" placeholder="שם משתמש..."
+							class="form-control">
+					</div>
+
+					<!-- Password -->
+					<div class="input-group mb-2">
+						<div class="input-group-append mr-auto">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input id="password-box" class="input-box ml-auto" type="password" name="password" placeholder="סיסמה..."
+							class="form-control">
+					</div>
+
+					<div class="login-alert alert alert-warning text-right" role="alert">
+						הערות
+					</div>
+
+					<!-- Submit btn -->
+					<div class="d-flex justify-content-center mt-3 login_container">
+						<input class="btn btn-primary login_btn" type="submit" value="התחבר">
+					</div>
+				</form>
+			</div>
+			<!-- Maybe add here a forgot password option-->
+			<!-- <div class="modal-footer d-flex justify-content-right">
+		<div class="links">
+			<a href="#" class="ml-2">שכחת סיסמה</a>
+		</div>
+	</div> -->
+		</div>
+	</div>
+</div>

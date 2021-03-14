@@ -1,0 +1,57 @@
+{% extends 'ExplosiveArea_App/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'ExplosiveArea_App/navbar.html' %}
+
+<div class="excercise-content row">
+    <div class="col-sm-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href={% url 'home' %}>בית</a></li>
+                {% if basketball_section %}
+                    <li class="breadcrumb-item"><a href={% url 'basketball' %}>כדורסל</a></li>
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href={% url 'section' excercise.section %}?basketball='T'>{{excercise.get_section_display}}</a></li>
+                {% else %}
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href={% url 'section' excercise.section %}>{{excercise.get_section_display}}</a></li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page"><span class="breadcrumb-link">{{ excercise.title }}</span></li>
+            </ol>
+        </nav>
+    </div>
+    
+    <div class="col-sm-6">
+        <h3 class="excercise-title">
+            {{ excercise.title }} 
+            {% if user.is_authenticated %} 
+                {% if basketball_section %}
+                    <a href={% url 'excercise_edit' section excercise.title excercise.id %}?basketball='T'><i class="fas fa-edit"></i></a>
+                {% else %}
+                    <a href={% url 'excercise_edit' section excercise.title excercise.id %}><i class="fas fa-edit"></i></a>
+                {% endif %}
+            {% endif %}
+        </h3>
+        {% if excercise.description %} 
+            <p class="text-muted">{{ excercise.description }}</p>
+        {% endif %}
+        <br>
+        <p>{{ excercise.instructions|safe }}</p>
+    </div>
+    <div class="col-sm-6">
+        {% if excercise.video %}
+            <video class="img-fluid" controls>
+                <source src="{{ excercise.video.url }}" type='video/mp4'>
+                Your browser does not support the video tag.
+            </video>
+        {% elif excercise.image%}
+                <img src={{ excercise.image.url }} class="excercise-img img-fluid" alt="Excercise img">
+        {% else %}
+                <img src="{% static 'ExplosiveArea_App/images/excercise_default.jpg' %}" class="card-img-top excercise-img" alt="Excercise img">
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}
